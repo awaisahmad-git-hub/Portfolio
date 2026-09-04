@@ -228,3 +228,49 @@
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Portrait treatment. The headshot was lit on a cool grey studio backdrop —
+ * several stops brighter, and the only cool surface on a warm dark page. The
+ * photograph itself is left alone; the frame grades it instead. Saturation and
+ * a little sepia take the cool cast off so the navy suit and the grey stop
+ * competing with the accent, a vignette sinks the backdrop toward the frame
+ * edge, and a base scrim grounds the shoulders in the page colour rather than
+ * a flat crop line. What is left carrying weight is the lit face.
+ *
+ * The numbers were picked against the actual photograph — brighter than this
+ * and the backdrop reads grey again, darker and the suit collapses to a black
+ * mass. Re-tune them if the portrait is ever replaced.
+ */
+.portrait-photo {
+  filter: saturate(0.64) brightness(0.95) sepia(0.13) contrast(1.05);
+  transition:
+    filter 500ms ease-out,
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* On hover the grade lifts — the portrait warms up as you approach it. */
+@media (hover: hover) {
+  .group:hover .portrait-photo {
+    filter: saturate(0.82) brightness(1) sepia(0.07) contrast(1.03);
+  }
+}
+
+/* Corner falloff around the lit face, then a base scrim in the page ground. */
+.portrait-vignette {
+  background:
+    radial-gradient(68% 58% at 50% 32%, transparent 26%, rgba(8, 9, 10, 0.78) 100%),
+    linear-gradient(to bottom, transparent 50%, rgba(8, 9, 10, 0.93) 100%);
+}
+
+/* One warm pass, the same amber as the hero wash, at soft-light. */
+.portrait-warm {
+  background: linear-gradient(158deg, rgba(224, 162, 77, 0.14), transparent 60%);
+  mix-blend-mode: soft-light;
+}
+
+/* Barely-there key light behind the frame, tying it to the ambient wash. */
+.portrait-glow {
+  background: radial-gradient(58% 48% at 50% 6%, rgba(224, 162, 77, 0.14), transparent 70%);
+  filter: blur(26px);
+}
