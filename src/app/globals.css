@@ -166,9 +166,51 @@
   }
 }
 
+/*
+ * Ambient hero texture. The grid drifts one tile over 60s — slow enough to
+ * read as depth rather than movement — and fades out before the content ends.
+ */
+.hero-grid {
+  /* Oversized by one tile so a 32px translate loops seamlessly. The parent
+     clips the overflow. Animating transform keeps this on the compositor —
+     no repaint per frame. */
+  position: absolute;
+  inset: -40px;
+  background-image: radial-gradient(circle at 1px 1px, rgba(236, 235, 232, 0.055) 1px, transparent 0);
+  background-size: 32px 32px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
+  animation: grid-drift 60s linear infinite;
+  will-change: transform;
+}
+
+@keyframes grid-drift {
+  to {
+    transform: translate3d(32px, 32px, 0);
+  }
+}
+
+/* Cards lift a couple of pixels and lighten their edge on hover. */
+.card-hover {
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease-out,
+    background-color 220ms ease-out;
+}
+
+@media (hover: hover) {
+  .card-hover:hover {
+    transform: translateY(-3px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .hero-grid {
+    animation: none;
   }
 
   *,
