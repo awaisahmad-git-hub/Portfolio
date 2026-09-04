@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #08090a;
+  --color-ink-2: #0d0f11;
+  --color-ink-3: #121517;
+  --color-line: #1e2225;
+  --color-line-2: #2a2f33;
+  --color-bone: #eceae5;
+  --color-bone-dim: #a5a29b;
+  --color-bone-faint: #6f6d68;
+  --color-amber: #e6a54b;
+  --color-amber-deep: #c8863a;
+  --color-amber-pale: #f5d9ae;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-display: var(--font-display), "Iowan Old Style", "Palatino Linotype", Georgia,
+    serif;
+  --font-mono: var(--font-mono), ui-monospace, "SFMono-Regular", "Cascadia Code", monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --gutter: clamp(1.25rem, 5vw, 4.5rem);
+    --shell: 1220px;
+  }
+
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* clears the floating nav when jumping to an anchor */
+    scroll-padding-top: 7rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-amber) 30%, transparent);
+    color: var(--color-bone);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: var(--shell);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* Fine dotted grid, the site's only ambient background texture. */
+  .grid-field {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(236, 234, 229, 0.09) 1px,
+      transparent 0
+    );
+    background-size: 34px 34px;
+  }
+
+  .rule {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-line-2) 12%,
+      var(--color-line-2) 88%,
+      transparent
+    );
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 0.98;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-bone-faint);
+  }
+
+  /* Subtle top-edge highlight used on elevated surfaces. */
+  .card-sheen {
+    position: relative;
+  }
+  .card-sheen::before {
+    content: "";
+    position: absolute;
+    inset-inline: 1.5rem;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--color-amber) 45%, transparent),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.45s var(--ease-soft);
+    pointer-events: none;
+  }
+  .card-sheen:hover::before,
+  .card-sheen:focus-within::before {
+    opacity: 1;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.4s var(--ease-out-expo);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(
+      160deg,
+      var(--color-bone) 30%,
+      color-mix(in oklab, var(--color-bone) 55%, var(--color-ink))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+}
+
+/* Marquee for the technology ribbon. */
+@keyframes ribbon {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.ribbon-track {
+  animation: ribbon 42s linear infinite;
+  will-change: transform;
+}
+
+@media (hover: hover) {
+  .ribbon:hover .ribbon-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ribbon-track {
+    animation: none;
+    transform: none;
+  }
+}
