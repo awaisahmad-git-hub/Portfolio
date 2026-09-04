@@ -31,9 +31,15 @@ export const about = {
     "Currently at Systonova, building a case management system for external clients.",
 } as const;
 
+/*
+ * Counts what is verifiable from the sections below, and no more. "Contributed
+ * to" is deliberate: one of the four (the auction platform) was built end to
+ * end, the other three were worked on alongside a team. The count stays at 4
+ * so it does not simply mirror the role count.
+ */
 export const stats = [
   { value: "3", label: "Engineering roles" },
-  { value: "4", label: "Systems delivered" },
+  { value: "4", label: "Systems contributed to" },
   { value: "3.55", label: "CGPA / 4.0" },
 ] as const;
 
@@ -171,7 +177,6 @@ export const skillGroups: SkillGroup[] = [
 export const education = {
   degree: "Bachelor of Computer Science",
   institution: "University of Education Lahore",
-  campus: "Vehari Campus",
   grade: "3.55",
   gradeMax: "4.0",
 } as const;

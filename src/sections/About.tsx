@@ -28,7 +28,9 @@ export function About() {
                   <dt className="sr-only">{stat.label}</dt>
                   <dd>
                     <span className="t-figure block text-accent">{stat.value}</span>
-                    <span className="mt-2 block text-[0.75rem] leading-snug text-bone-faint">
+                    {/* Three narrow columns — balance the wrap so a two-word
+                        label does not leave a single orphan on line two. */}
+                    <span className="mt-2 block text-balance text-[0.75rem] leading-snug text-bone-faint">
                       {stat.label}
                     </span>
                   </dd>
@@ -42,7 +44,7 @@ export function About() {
                 {education.degree}
               </p>
               <p className="mt-1 text-[0.8125rem] text-bone-faint">
-                {education.institution} · {education.campus}
+                {education.institution}
               </p>
             </div>
           </Reveal>
