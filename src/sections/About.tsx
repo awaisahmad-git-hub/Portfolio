@@ -10,10 +10,10 @@ export function About() {
 
         <div className="mt-10 grid gap-10 md:grid-cols-[1.35fr_1fr] md:gap-16">
           <Reveal>
-            <p className="text-[1.02rem] leading-relaxed text-bone-dim">
+            <p className="t-lede text-bone-dim">
               {about.summary}
             </p>
-            <p className="mt-3 text-[1.02rem] leading-relaxed text-bone-dim">
+            <p className="t-lede mt-3 text-bone-dim">
               {about.current}
             </p>
           </Reveal>
@@ -24,10 +24,10 @@ export function About() {
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>
                   <dd>
-                    <span className="display block text-[1.75rem] text-accent">
+                    <span className="t-figure block text-accent">
                       {stat.value}
                     </span>
-                    <span className="mt-1.5 block text-[0.75rem] leading-snug text-bone-faint">
+                    <span className="mt-2 block text-[0.75rem] leading-snug text-bone-faint">
                       {stat.label}
                     </span>
                   </dd>
@@ -36,9 +36,9 @@ export function About() {
             </dl>
 
             <div className="mt-5">
-              <p className="eyebrow">Education</p>
-              <p className="mt-2 text-[0.9rem] text-bone">{education.degree}</p>
-              <p className="mt-0.5 text-[0.82rem] text-bone-faint">
+              <p className="t-label">Education</p>
+              <p className="mt-3 text-[0.875rem] font-medium text-bone">{education.degree}</p>
+              <p className="mt-1 text-[0.8125rem] text-bone-faint">
                 {education.institution} · {education.campus}
               </p>
             </div>

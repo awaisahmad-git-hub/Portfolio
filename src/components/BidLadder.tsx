@@ -12,10 +12,10 @@ export function BidLadder() {
       aria-hidden="true"
     >
       <div className="flex items-center justify-between">
-        <span className="font-mono text-[0.66rem] uppercase tracking-[0.12em] text-bone-faint">
+        <span className="t-label">
           Live bids
         </span>
-        <span className="flex items-center gap-1.5 font-mono text-[0.66rem] text-accent">
+        <span className="t-meta flex items-center gap-1.5 text-accent">
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />
           SignalR
         </span>

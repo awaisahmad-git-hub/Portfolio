@@ -15,7 +15,7 @@ export function Footer() {
   return (
     <footer className="border-t border-line py-8">
       <div className="shell flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-        <p className="text-[0.78rem] text-bone-faint">
+        <p className="text-[0.8125rem] text-bone-faint">
           &copy; {year} {profile.name}
         </p>
 
@@ -39,7 +39,7 @@ export function Footer() {
           <button
             type="button"
             onClick={toTop}
-            className="inline-flex items-center gap-1.5 text-[0.78rem] text-bone-faint transition-colors duration-200 hover:text-bone"
+            className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-bone-faint transition-colors duration-200 hover:text-bone"
           >
             Top
             <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />

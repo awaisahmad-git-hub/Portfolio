@@ -24,20 +24,20 @@ export function Hero() {
       <div className="shell">
         <div className="grid items-center gap-12 md:grid-cols-[1.35fr_1fr] md:gap-16">
           <div>
-            <motion.p {...enter(0)} className="eyebrow">
+            <motion.p {...enter(0)} className="t-label">
               {profile.role} · {profile.location}
             </motion.p>
 
             <motion.h1
               {...enter(0.06)}
-              className="display mt-5 text-[clamp(2.75rem,7vw,4.5rem)]"
+              className="t-name mt-5"
             >
               {profile.name}
             </motion.h1>
 
             <motion.p
               {...enter(0.12)}
-              className="mt-5 max-w-md text-[1.02rem] leading-relaxed text-bone-dim"
+              className="t-lede mt-5 max-w-md text-bone-dim"
             >
               {profile.tagline}
             </motion.p>

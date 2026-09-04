@@ -16,13 +16,13 @@ export function Projects() {
         <Reveal>
           <article className="mt-10 grid gap-8 rounded-xl border border-line bg-ink-2/40 p-6 sm:p-8 lg:grid-cols-[1.25fr_1fr] lg:gap-12">
             <div>
-              <p className="eyebrow">{featured.kind}</p>
-              <h3 className="mt-3 text-[1.35rem] font-medium tracking-tight sm:text-[1.5rem]">
+              <p className="t-label">{featured.kind}</p>
+              <h3 className="t-card-lg mt-3">
                 {featured.name}
               </h3>
-              <p className="mt-1 text-[0.82rem] text-bone-faint">{featured.context}</p>
+              <p className="mt-1.5 text-[0.8125rem] text-bone-faint">{featured.context}</p>
 
-              <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-bone-dim">
+              <p className="t-body mt-5 max-w-md text-bone-dim">
                 {featured.blurb}
               </p>
 
@@ -30,7 +30,7 @@ export function Projects() {
                 {featured.highlights?.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-2.5 text-[0.88rem] leading-relaxed text-bone-dim"
+                    className="t-body flex gap-2.5 text-bone-dim"
                   >
                     <span
                       aria-hidden="true"
@@ -45,7 +45,7 @@ export function Projects() {
                 {featured.stack.map((tech) => (
                   <li
                     key={tech}
-                    className="font-mono text-[0.7rem] uppercase tracking-[0.08em] text-bone-dim"
+                    className="t-meta text-bone-dim"
                   >
                     {tech}
                   </li>
@@ -66,13 +66,13 @@ export function Projects() {
           {rest.map((project, i) => (
             <Reveal key={project.slug} delay={i * 0.05}>
               <article className="flex h-full flex-col rounded-xl border border-line p-6 transition-colors duration-200 hover:border-line-2 hover:bg-ink-2/40">
-                <p className="eyebrow">{project.kind}</p>
-                <h3 className="mt-3 text-[1.05rem] font-medium leading-snug tracking-tight">
+                <p className="t-label">{project.kind}</p>
+                <h3 className="t-card mt-3">
                   {project.name}
                 </h3>
-                <p className="mt-1 text-[0.78rem] text-bone-faint">{project.context}</p>
+                <p className="mt-1.5 text-[0.8125rem] text-bone-faint">{project.context}</p>
 
-                <p className="mt-4 text-[0.88rem] leading-relaxed text-bone-dim">
+                <p className="t-body mt-4 text-bone-dim">
                   {project.blurb}
                 </p>
 
@@ -80,7 +80,7 @@ export function Projects() {
                   {project.stack.map((tech) => (
                     <li
                       key={tech}
-                      className="font-mono text-[0.7rem] uppercase tracking-[0.08em] text-bone-dim"
+                      className="t-meta text-bone-dim"
                     >
                       {tech}
                     </li>
