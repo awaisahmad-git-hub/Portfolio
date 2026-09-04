@@ -1,7 +1,7 @@
 # Awais Ahmad — Portfolio
 
-A single-page personal portfolio for a .NET engineer. Dark, editorial, and
-built to be sent to recruiters and clients.
+A single-page professional profile for a .NET engineer. Dark, restrained, and
+built to be scanned in under a minute.
 
 **Stack:** Next.js (App Router) · React · TypeScript · Tailwind CSS v4 ·
 Motion · lucide-react
@@ -23,7 +23,7 @@ and `profile.cv`) if you'd rather rename the files.
 ## Run
 
 ```bash
-npm install
+npm install        # required after a fresh clone — node_modules is not committed
 npm run dev        # http://localhost:3000
 ```
 
@@ -35,27 +35,30 @@ npm run typecheck                # tsc --noEmit
 ## Editing the content
 
 Everything the page displays lives in one file:
-**[src/data/site.ts](src/data/site.ts)** — profile, stats, focus areas,
-experience, projects, skill groups, education, navigation. The components read
-from it, so adding a role or a project is a data edit, not a layout edit.
+**[src/data/site.ts](src/data/site.ts)** — profile, about, stats, experience,
+projects, skill groups, education, navigation. The components read from it, so
+adding a role or a project is a data edit, not a layout edit.
 
-To add a project, append to `projects`. Give it a `slug`, and add a matching
-case in [src/components/ProjectArt.tsx](src/components/ProjectArt.tsx) if you
-want bespoke artwork — otherwise it falls through to the calendar composition.
+The copy is deliberately condensed: hero is one line, About is two sentences,
+experience bullets are single impact statements, project blurbs are one or two
+sentences. Keep new entries to that length — the whole point is that a reader
+can take the page in at a glance.
 
 ## Structure
 
 ```
 src/
   app/          layout, page, globals.css, icon, opengraph-image, robots, sitemap
-  components/   Nav, Reveal, Section, MagneticLink, Portrait, ProjectArt,
-                Ribbon, Spotlight, ScrollProgress, MotionProvider, icons
-  sections/     Hero, About, Experience, Projects, Skills, Education,
-                Contact, Footer
+  components/   Nav, Section, Reveal, Button, Portrait, BidLadder,
+                MotionProvider, icons
+  sections/     Hero, About, Experience, Projects, Skills, Contact, Footer
   data/         site.ts  ← all content
   hooks/        useActiveSection
 public/         profile.jpg, CV pdf
 ```
+
+Education is folded into the About section rather than given a section of its
+own; the auction project's bid-ladder graphic is the page's only illustration.
 
 ## Deploying
 
@@ -66,14 +69,13 @@ prerenders it, so any Node host or Vercel works as-is.
 
 ## Notes on the build
 
-- **Motion.** Reveals use `whileInView` on opacity + transform only.
-  `MotionConfig reducedMotion="user"` in
-  [src/components/MotionProvider.tsx](src/components/MotionProvider.tsx) drops
-  every transform when the visitor prefers reduced motion while letting fades
-  settle, so no element can be stranded invisible. CSS-driven motion (the
-  technology ribbon, smooth scrolling) is disabled in the same media query in
-  [src/app/globals.css](src/app/globals.css).
+- **Motion.** One entrance animation (a short fade and 12px rise on scroll),
+  plus hover states and the nav underline. `MotionConfig reducedMotion="user"`
+  in [src/components/MotionProvider.tsx](src/components/MotionProvider.tsx)
+  drops the transform for visitors who prefer reduced motion and keeps the
+  fade, so nothing can be left stranded at `opacity: 0`.
 - **Accessibility.** Semantic landmarks, a skip link, one `h1`, labelled
   sections, visible focus rings, and accessible names on every control.
-- **Content.** Every fact on the page comes from the CV. Project cards use
-  abstract, code-derived artwork rather than invented screenshots.
+- **Content.** Every fact comes from the CV, summarised for the web.
+- **`.vs/` is excluded** from both git and Tailwind's source scanning — Visual
+  Studio keeps locked index files there that otherwise break the build.

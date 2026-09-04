@@ -27,7 +27,7 @@ const mono = JetBrains_Mono({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 const description =
-  ".NET Engineer building web and cross-platform applications with ASP.NET Core, .NET MAUI, C#, RESTful Web APIs and Entity Framework Core.";
+  ".NET engineer building web and cross-platform applications with ASP.NET Core, C#, Web APIs and .NET MAUI.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -47,10 +47,8 @@ export const metadata: Metadata = {
     ".NET MAUI",
     "C#",
     "Entity Framework Core",
-    "RESTful Web API",
-    "Blazor",
+    "Web API",
     "SQL Server",
-    "Azure DevOps",
   ],
   alternates: { canonical: "/" },
   openGraph: {
@@ -83,7 +81,7 @@ const personSchema = {
   "@type": "Person",
   name: profile.name,
   jobTitle: profile.role,
-  description: profile.summary,
+  description,
   email: `mailto:${profile.email}`,
   telephone: profile.phone,
   url: siteUrl,
@@ -99,7 +97,7 @@ const personSchema = {
     ".NET MAUI",
     "C#",
     "Entity Framework Core",
-    "RESTful Web APIs",
+    "Web API",
     "SQL Server",
   ],
 };
@@ -110,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-[100] focus:rounded-full focus:bg-amber focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-ink"
         >
           Skip to content
         </a>
