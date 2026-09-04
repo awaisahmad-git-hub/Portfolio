@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Visual Studio keeps locked index files under .vs — never scan it. */
+@source not "../../.vs";
+
 @theme {
   --color-ink: #08090a;
   --color-ink-2: #0d0f11;
