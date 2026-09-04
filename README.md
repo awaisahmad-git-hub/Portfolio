@@ -4,7 +4,7 @@ A single-page professional profile for a .NET engineer. Dark, restrained, and
 built to be scanned in under a minute.
 
 **Stack:** Next.js (App Router) · React · TypeScript · Tailwind CSS v4 ·
-Motion · lucide-react
+Motion · lucide-react · Geist
 
 ---
 
@@ -69,6 +69,14 @@ prerenders it, so any Node host or Vercel works as-is.
 
 ## Notes on the build
 
+- **Typography.** One family — Geist, loaded as a single self-hosted variable
+  woff2 (~29 KB, latin subset) via `next/font`. Three weights are used: 400
+  body, 500 metadata and UI, 600 headings. The scale lives in
+  [globals.css](src/app/globals.css) as `.t-name`, `.t-section`, `.t-headline`,
+  `.t-card`, `.t-card-lg`, `.t-body`, `.t-lede`, `.t-label`, `.t-meta` and
+  `.t-figure` — nothing sets its own size, weight and tracking ad hoc, so the
+  hierarchy stays consistent. Headings use `clamp()`; body text is a fixed
+  15px at 1.65 line-height on every breakpoint.
 - **Motion.** One entrance animation (a short fade and 12px rise on scroll),
   plus hover states and the nav underline. `MotionConfig reducedMotion="user"`
   in [src/components/MotionProvider.tsx](src/components/MotionProvider.tsx)

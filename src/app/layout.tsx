@@ -1,27 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import { MotionProvider } from "@/components/MotionProvider";
 import { profile } from "@/data/site";
 import "./globals.css";
 
-const inter = Inter({
+/**
+ * One family for the whole site. The variable file covers every weight we use
+ * (400 / 500 / 600) in a single request, subset to latin and swapped in so
+ * text is never invisible while it loads.
+ */
+const geist = Geist({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
-});
-
-const display = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-  variable: "--font-display",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-  variable: "--font-mono",
+  variable: "--font-geist",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -104,7 +95,7 @@ const personSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${display.variable} ${mono.variable}`}>
+    <html lang="en" className={geist.variable}>
       <body>
         <a
           href="#main"
