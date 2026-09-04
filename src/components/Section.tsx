@@ -36,8 +36,8 @@ export function SectionHeading({
   return (
     <Reveal>
       <header className="flex flex-col gap-3 border-b border-line pb-6">
-        <span className="eyebrow">{label}</span>
-        <h2 id={id} className="text-[1.6rem] font-medium tracking-tight sm:text-[1.9rem]">
+        <span className="t-label">{label}</span>
+        <h2 id={id} className="t-section">
           {title}
         </h2>
       </header>

@@ -39,7 +39,7 @@ export function Nav() {
         <div className="shell flex h-16 items-center justify-between">
           <a
             href="#home"
-            className="text-[0.88rem] font-medium tracking-tight text-bone"
+            className="text-[0.9375rem] font-semibold tracking-[-0.015em] text-bone"
             aria-label={`${profile.name} — back to top`}
           >
             {profile.name}
@@ -54,7 +54,7 @@ export function Nav() {
                     <a
                       href={`#${item.id}`}
                       aria-current={isActive ? "true" : undefined}
-                      className={`relative block py-1 text-[0.82rem] transition-colors duration-200 ${
+                      className={`relative block py-1 text-[0.875rem] font-medium transition-colors duration-200 ${
                         isActive ? "text-bone" : "text-bone-faint hover:text-bone-dim"
                       }`}
                     >
@@ -77,7 +77,7 @@ export function Nav() {
             <a
               href={profile.cv}
               download
-              className="hidden rounded-lg border border-line-2 px-3.5 py-1.5 text-[0.78rem] text-bone-dim transition-colors duration-200 hover:border-bone-faint hover:text-bone sm:block"
+              className="hidden rounded-lg border border-line-2 px-3.5 py-1.5 text-[0.8125rem] font-medium text-bone-dim transition-colors duration-200 hover:border-bone-faint hover:text-bone sm:block"
             >
               CV
             </a>
@@ -109,7 +109,7 @@ export function Nav() {
               className="absolute inset-x-0 top-0 border-b border-line bg-ink px-[var(--gutter)] pb-6"
             >
               <div className="flex h-16 items-center justify-between">
-                <span className="text-[0.88rem] font-medium tracking-tight">
+                <span className="text-[0.9375rem] font-semibold tracking-[-0.015em]">
                   {profile.name}
                 </span>
                 <button
@@ -128,7 +128,7 @@ export function Nav() {
                     <a
                       href={`#${item.id}`}
                       onClick={() => setOpen(false)}
-                      className={`block border-t border-line py-3.5 text-[0.95rem] ${
+                      className={`block border-t border-line py-3.5 text-[1rem] font-medium ${
                         active === item.id ? "text-accent" : "text-bone"
                       }`}
                     >

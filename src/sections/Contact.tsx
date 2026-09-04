@@ -29,10 +29,10 @@ export function Contact() {
         <Reveal>
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="eyebrow">Contact</span>
+              <span className="t-label">Contact</span>
               <h2
                 id="contact-title"
-                className="display mt-4 text-[clamp(1.9rem,4.5vw,2.75rem)]"
+                className="t-headline mt-4"
               >
                 Open to new opportunities.
               </h2>
@@ -64,8 +64,8 @@ export function Contact() {
                     aria-hidden="true"
                   />
                   <span className="min-w-0">
-                    <span className="eyebrow block">{label}</span>
-                    <span className="mt-1 block truncate text-[0.85rem] text-bone">
+                    <span className="t-label block">{label}</span>
+                    <span className="mt-1.5 block truncate text-[0.875rem] font-medium text-bone">
                       {value}
                     </span>
                   </span>

@@ -14,11 +14,11 @@ export function Experience() {
               <Reveal delay={i * 0.05}>
                 <article className="grid gap-5 border-b border-line py-8 sm:grid-cols-[10.5rem_1fr] sm:gap-10">
                   <div>
-                    <p className="font-mono text-[0.72rem] uppercase tracking-[0.1em] text-bone-faint">
+                    <p className="t-meta text-bone-faint">
                       {role.period}
                     </p>
                     {role.current && (
-                      <p className="mt-2 inline-flex items-center gap-1.5 text-[0.72rem] text-accent">
+                      <p className="t-meta mt-2 inline-flex items-center gap-1.5 text-accent">
                         <span
                           className="h-1.5 w-1.5 rounded-full bg-accent"
                           aria-hidden="true"
@@ -29,17 +29,17 @@ export function Experience() {
                   </div>
 
                   <div>
-                    <h3 className="text-[1.1rem] font-medium tracking-tight">
+                    <h3 className="t-card">
                       {role.role}
                       <span className="text-bone-faint"> · {role.company}</span>
                     </h3>
-                    <p className="mt-1 text-[0.85rem] text-bone-faint">{role.project}</p>
+                    <p className="mt-1 text-[0.875rem] text-bone-faint">{role.project}</p>
 
                     <ul className="mt-4 space-y-1.5">
                       {role.points.map((point) => (
                         <li
                           key={point}
-                          className="flex gap-2.5 text-[0.89rem] leading-relaxed text-bone-dim"
+                          className="t-body flex gap-2.5 text-bone-dim"
                         >
                           <span
                             aria-hidden="true"
@@ -54,7 +54,7 @@ export function Experience() {
                       {role.stack.map((tech) => (
                         <li
                           key={tech}
-                          className="font-mono text-[0.7rem] uppercase tracking-[0.08em] text-bone-dim"
+                          className="t-meta text-bone-dim"
                         >
                           {tech}
                         </li>

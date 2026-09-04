@@ -16,8 +16,8 @@ export function Portrait() {
       <div className="relative overflow-hidden rounded-xl border border-line-2 bg-ink-2">
         {failed ? (
           <div className="flex aspect-[4/5] flex-col items-center justify-center gap-2">
-            <span className="display text-5xl text-accent">AA</span>
-            <span className="eyebrow">Portrait pending</span>
+            <span className="text-[2.5rem] font-semibold tracking-tight text-accent">AA</span>
+            <span className="t-label">Portrait pending</span>
           </div>
         ) : (
           <div className="relative aspect-[4/5]">
