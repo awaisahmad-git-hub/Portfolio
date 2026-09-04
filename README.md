@@ -14,7 +14,7 @@ Two files from the source material must be dropped into [public/](public/):
 
 | File | What it is |
 | --- | --- |
-| `profile.jpg` | The headshot used in the hero. Without it the hero shows a monogram plate instead — nothing breaks, but the first screen is much weaker. |
+| `profile.png` | The headshot used in the hero. Without it the hero shows a monogram plate instead — nothing breaks, but the first screen is much weaker. |
 | `Awais-Ahmad-Software-Engineer.pdf` | The CV. It's what every "Download CV" button links to. |
 
 Both paths are set in [src/data/site.ts](src/data/site.ts) (`profile.photo`
@@ -49,12 +49,12 @@ can take the page in at a glance.
 ```
 src/
   app/          layout, page, globals.css, icon, opengraph-image, robots, sitemap
-  components/   Nav, Section, Reveal, Button, Portrait, BidLadder,
-                MotionProvider, icons
+  components/   Nav, Section, Button, Portrait, BidLadder, AmbientBackdrop,
+                motion-primitives, MotionProvider, icons
   sections/     Hero, About, Experience, Projects, Skills, Contact, Footer
   data/         site.ts  ← all content
-  hooks/        useActiveSection
-public/         profile.jpg, CV pdf
+  hooks/        useActiveSection, usePointerFine
+public/         profile.png, CV pdf
 ```
 
 Education is folded into the About section rather than given a section of its
@@ -82,8 +82,13 @@ prerenders it, so any Node host or Vercel works as-is.
   `Reveal`, `Stagger` and `StaggerItem` — the three building blocks every
   section uses. Reveals run 400–550ms; interactions 150–300ms; stagger steps
   are 30–80ms. Everything animates transform and opacity only, including the
-  hero backdrop grid (a translated layer, not `background-position`, so it
+  ambient backdrop grid (a translated layer, not `background-position`, so it
   stays on the compositor).
+
+  The hero and the contact section share one treatment — the same
+  [AmbientBackdrop](src/components/AmbientBackdrop.tsx) (mirrored via its
+  `anchor` prop) and the same label → headline → buttons → cards cadence, so
+  the page opens and closes the same way.
 
   `MotionConfig reducedMotion="user"` in
   [MotionProvider.tsx](src/components/MotionProvider.tsx) strips every

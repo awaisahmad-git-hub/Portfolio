@@ -5,7 +5,7 @@ import { ArrowDown, Download } from "lucide-react";
 import { profile } from "@/data/site";
 import { Button } from "@/components/Button";
 import { Portrait } from "@/components/Portrait";
-import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { AmbientBackdrop } from "@/components/AmbientBackdrop";
 import { EASE } from "@/components/motion-primitives";
 
 /**
@@ -26,7 +26,7 @@ export function Hero() {
       aria-label="Introduction"
       className="relative isolate border-b border-line pb-16 pt-32 sm:pb-20 sm:pt-36"
     >
-      <HeroBackdrop />
+      <AmbientBackdrop />
 
       <div className="shell">
         <div className="grid items-center gap-12 md:grid-cols-[1.35fr_1fr] md:gap-16">

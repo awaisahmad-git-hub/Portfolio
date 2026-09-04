@@ -4,14 +4,18 @@ import { useEffect, useRef } from "react";
 import { usePointerFine } from "@/hooks/usePointerFine";
 
 /**
- * The page's only ambient motion: a faint dot grid that drifts very slowly,
- * and a soft light that follows the cursor across the hero.
+ * The page's only ambient motion, shared by the two bookend sections: a faint
+ * dot grid that drifts very slowly, a soft wash behind the headline, and a
+ * light that follows the cursor.
  *
- * Both are low-opacity and pointer-gated. The spotlight writes CSS custom
+ * `anchor` mirrors the treatment for the section at the foot of the page — the
+ * grid is densest at the page's outer edge and fades toward the content.
+ *
+ * Everything is low-opacity and pointer-gated. The spotlight writes CSS custom
  * properties from inside a rAF callback, so it never triggers a React render
  * and never touches layout.
  */
-export function HeroBackdrop() {
+export function AmbientBackdrop({ anchor = "top" }: { anchor?: "top" | "bottom" }) {
   const spotRef = useRef<HTMLDivElement>(null);
   const interactive = usePointerFine();
 
@@ -28,8 +32,8 @@ export function HeroBackdrop() {
 
     const onMove = (event: PointerEvent) => {
       const rect = host.getBoundingClientRect();
-      // Ignore the pointer once it has left the hero band.
-      if (event.clientY > rect.bottom + 80) return;
+      // Only track while the pointer is near this section's band.
+      if (event.clientY < rect.top - 80 || event.clientY > rect.bottom + 80) return;
       x = event.clientX - rect.left;
       y = event.clientY - rect.top;
 
@@ -55,13 +59,24 @@ export function HeroBackdrop() {
     };
   }, [interactive]);
 
+  const bottom = anchor === "bottom";
+
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      {/* Drifting dot grid, faded out towards the bottom of the section. */}
-      <div className="hero-grid" />
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+    >
+      {/* Drifting dot grid, fading away from the page edge. */}
+      <div className={bottom ? "ambient-grid ambient-grid--up" : "ambient-grid"} />
 
       {/* Static wash behind the headline. */}
-      <div className="absolute inset-x-0 -top-32 h-96 bg-[radial-gradient(50%_60%_at_35%_0%,rgba(224,162,77,0.055),transparent_70%)]" />
+      <div
+        className={
+          bottom
+            ? "absolute inset-x-0 -bottom-24 h-96 bg-[radial-gradient(50%_60%_at_35%_100%,rgba(224,162,77,0.055),transparent_70%)]"
+            : "absolute inset-x-0 -top-32 h-96 bg-[radial-gradient(50%_60%_at_35%_0%,rgba(224,162,77,0.055),transparent_70%)]"
+        }
+      />
 
       {/* Cursor light. */}
       <div

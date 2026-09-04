@@ -13,7 +13,7 @@ export const profile = {
   /** One value-focused line. Nothing else belongs in the hero. */
   tagline: "I build .NET applications end to end — from the API layer to the interface.",
   location: "Pakistan",
-  email: "softwarengineer@gmail.com",
+  email: "awais.softwarengineer@gmail.com",
   phone: "+92 306 1060669",
   phoneHref: "+923061060669",
   linkedin: "https://linkedin.com/in/awais-linked-in",
