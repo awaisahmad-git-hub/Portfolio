@@ -5,13 +5,18 @@ import { ArrowDown, Download } from "lucide-react";
 import { profile } from "@/data/site";
 import { Button } from "@/components/Button";
 import { Portrait } from "@/components/Portrait";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { EASE } from "@/components/motion-primitives";
 
-const ease = [0.22, 1, 0.36, 1] as const;
-
+/**
+ * Entrance sequence: label → name → tagline → buttons, 80ms apart, with the
+ * portrait wiping open alongside. Everything is on screen inside ~700ms, so
+ * the page is readable almost immediately.
+ */
 const enter = (delay: number) => ({
   initial: { opacity: 0, y: 14 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.55, delay, ease },
+  transition: { duration: 0.55, delay, ease: EASE },
 });
 
 export function Hero() {
@@ -19,8 +24,10 @@ export function Hero() {
     <section
       id="home"
       aria-label="Introduction"
-      className="border-b border-line pb-16 pt-32 sm:pb-20 sm:pt-36"
+      className="relative isolate border-b border-line pb-16 pt-32 sm:pb-20 sm:pt-36"
     >
+      <HeroBackdrop />
+
       <div className="shell">
         <div className="grid items-center gap-12 md:grid-cols-[1.35fr_1fr] md:gap-16">
           <div>
@@ -28,24 +35,29 @@ export function Hero() {
               {profile.role} · {profile.location}
             </motion.p>
 
-            <motion.h1
-              {...enter(0.06)}
-              className="t-name mt-5"
-            >
-              {profile.name}
-            </motion.h1>
+            {/* The name is masked so it rises out of its own line box. */}
+            <h1 className="t-name mt-5 overflow-hidden">
+              <motion.span
+                className="block"
+                initial={{ opacity: 0, y: "40%" }}
+                animate={{ opacity: 1, y: "0%" }}
+                transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
+              >
+                {profile.name}
+              </motion.span>
+            </h1>
 
-            <motion.p
-              {...enter(0.12)}
-              className="t-lede mt-5 max-w-md text-bone-dim"
-            >
+            <motion.p {...enter(0.16)} className="t-lede mt-5 max-w-md text-bone-dim">
               {profile.tagline}
             </motion.p>
 
-            <motion.div {...enter(0.18)} className="mt-9 flex flex-wrap gap-3">
+            <motion.div {...enter(0.24)} className="mt-9 flex flex-wrap gap-3">
               <Button href="#projects">
                 View work
-                <ArrowDown className="h-4 w-4" aria-hidden="true" />
+                <ArrowDown
+                  className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5"
+                  aria-hidden="true"
+                />
               </Button>
               <Button href={profile.cv} variant="outline" download>
                 Download CV
@@ -54,9 +66,9 @@ export function Hero() {
             </motion.div>
           </div>
 
-          <motion.div {...enter(0.1)} className="order-first md:order-last">
+          <div className="order-first md:order-last">
             <Portrait />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

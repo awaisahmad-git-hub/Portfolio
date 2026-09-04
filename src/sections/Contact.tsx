@@ -1,6 +1,6 @@
 import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { Section } from "@/components/Section";
-import { Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/motion-primitives";
 import { Button } from "@/components/Button";
 import { LinkedInIcon } from "@/components/icons";
 import { profile } from "@/data/site";
