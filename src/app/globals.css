@@ -170,7 +170,7 @@
  * Ambient hero texture. The grid drifts one tile over 60s — slow enough to
  * read as depth rather than movement — and fades out before the content ends.
  */
-.hero-grid {
+.ambient-grid {
   /* Oversized by one tile so a 32px translate loops seamlessly. The parent
      clips the overflow. Animating transform keeps this on the compositor —
      no repaint per frame. */
@@ -182,6 +182,12 @@
   mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
   animation: grid-drift 60s linear infinite;
   will-change: transform;
+}
+
+/* Mirrored for the section at the foot of the page. */
+.ambient-grid--up {
+  -webkit-mask-image: linear-gradient(to top, #000 30%, transparent 92%);
+  mask-image: linear-gradient(to top, #000 30%, transparent 92%);
 }
 
 @keyframes grid-drift {
@@ -209,7 +215,7 @@
     scroll-behavior: auto;
   }
 
-  .hero-grid {
+  .ambient-grid {
     animation: none;
   }
 
