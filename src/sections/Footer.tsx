@@ -13,20 +13,17 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t border-line py-10">
-      <div className="shell flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
-        <div className="flex flex-col items-center gap-1 sm:items-start">
-          <span className="text-[0.9rem] tracking-tight text-bone">{profile.name}</span>
-          <span className="text-[0.78rem] text-bone-faint">
-            &copy; {year} · Built with Next.js and Tailwind CSS
-          </span>
-        </div>
+    <footer className="border-t border-line py-8">
+      <div className="shell flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+        <p className="text-[0.78rem] text-bone-faint">
+          &copy; {year} {profile.name}
+        </p>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <a
             href={`mailto:${profile.email}`}
             aria-label="Email Awais Ahmad"
-            className="grid h-10 w-10 place-items-center rounded-full border border-line text-bone-dim transition hover:border-amber/50 hover:text-amber"
+            className="text-bone-faint transition-colors duration-200 hover:text-bone"
           >
             <Mail className="h-4 w-4" aria-hidden="true" />
           </a>
@@ -35,20 +32,17 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Awais Ahmad on LinkedIn"
-            className="grid h-10 w-10 place-items-center rounded-full border border-line text-bone-dim transition hover:border-amber/50 hover:text-amber"
+            className="text-bone-faint transition-colors duration-200 hover:text-bone"
           >
             <LinkedInIcon className="h-4 w-4" aria-hidden="true" />
           </a>
           <button
             type="button"
             onClick={toTop}
-            className="group ml-2 inline-flex items-center gap-2 rounded-full border border-line px-4 py-2.5 text-[0.8rem] text-bone-dim transition hover:border-amber/50 hover:text-amber"
+            className="inline-flex items-center gap-1.5 text-[0.78rem] text-bone-faint transition-colors duration-200 hover:text-bone"
           >
-            Back to top
-            <ArrowUp
-              className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5"
-              aria-hidden="true"
-            />
+            Top
+            <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />
           </button>
         </div>
       </div>

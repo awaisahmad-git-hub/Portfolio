@@ -16,8 +16,6 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           background: "#08090a",
-          backgroundImage:
-            "radial-gradient(900px 560px at 80% 0%, rgba(230,165,75,0.26), transparent 68%)",
           padding: "72px 80px",
           color: "#eceae5",
           fontFamily: "sans-serif",
@@ -29,7 +27,7 @@ export default function OpengraphImage() {
               width: 12,
               height: 12,
               borderRadius: 12,
-              background: "#e6a54b",
+              background: "#e0a24d",
             }}
           />
           <div
@@ -40,7 +38,7 @@ export default function OpengraphImage() {
               color: "#a5a29b",
             }}
           >
-            {profile.roleLong}
+            {profile.role}
           </div>
         </div>
 
@@ -72,7 +70,7 @@ export default function OpengraphImage() {
           <div style={{ fontSize: 26, color: "#a5a29b" }}>
             ASP.NET Core · .NET MAUI · Web APIs · EF Core
           </div>
-          <div style={{ fontSize: 24, color: "#e6a54b" }}>{profile.location}</div>
+          <div style={{ fontSize: 24, color: "#e0a24d" }}>{profile.location}</div>
         </div>
       </div>
     ),
