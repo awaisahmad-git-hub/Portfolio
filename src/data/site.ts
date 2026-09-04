@@ -36,11 +36,13 @@ export const about = {
  * to" is deliberate: one of the four (the auction platform) was built end to
  * end, the other three were worked on alongside a team. The count stays at 4
  * so it does not simply mirror the role count.
+ *
+ * Two entries, laid out in two columns. The grade lives with the degree in the
+ * education block instead — it is a credential, not a measure of the work.
  */
 export const stats = [
   { value: "3", label: "Engineering roles" },
   { value: "4", label: "Systems contributed to" },
-  { value: "3.55", label: "CGPA / 4.0" },
 ] as const;
 
 export type Experience = {
