@@ -77,11 +77,21 @@ prerenders it, so any Node host or Vercel works as-is.
   `.t-figure` — nothing sets its own size, weight and tracking ad hoc, so the
   hierarchy stays consistent. Headings use `clamp()`; body text is a fixed
   15px at 1.65 line-height on every breakpoint.
-- **Motion.** One entrance animation (a short fade and 12px rise on scroll),
-  plus hover states and the nav underline. `MotionConfig reducedMotion="user"`
-  in [src/components/MotionProvider.tsx](src/components/MotionProvider.tsx)
-  drops the transform for visitors who prefer reduced motion and keeps the
-  fade, so nothing can be left stranded at `opacity: 0`.
+- **Motion.** Shared easing and duration tokens live in
+  [motion-primitives.tsx](src/components/motion-primitives.tsx) alongside
+  `Reveal`, `Stagger` and `StaggerItem` — the three building blocks every
+  section uses. Reveals run 400–550ms; interactions 150–300ms; stagger steps
+  are 30–80ms. Everything animates transform and opacity only, including the
+  hero backdrop grid (a translated layer, not `background-position`, so it
+  stays on the compositor).
+
+  `MotionConfig reducedMotion="user"` in
+  [MotionProvider.tsx](src/components/MotionProvider.tsx) strips every
+  transform for visitors who prefer reduced motion while keeping fades, so
+  nothing can be stranded at `opacity: 0`. Ambient and cursor-reactive effects
+  are additionally gated on [usePointerFine](src/hooks/usePointerFine.ts),
+  which requires a precise pointer *and* no reduced-motion preference — so
+  they never run on touch devices at all.
 - **Accessibility.** Semantic landmarks, a skip link, one `h1`, labelled
   sections, visible focus rings, and accessible names on every control.
 - **Content.** Every fact comes from the CV, summarised for the web.

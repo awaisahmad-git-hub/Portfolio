@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Reveal } from "./Reveal";
+import { Reveal } from "./motion-primitives";
 
 export function Section({
   id,

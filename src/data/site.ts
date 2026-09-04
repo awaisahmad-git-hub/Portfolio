@@ -19,7 +19,7 @@ export const profile = {
   linkedin: "https://linkedin.com/in/awais-linked-in",
   linkedinLabel: "/in/awais-linked-in",
   cv: "/Awais-Ahmad-Software-Engineer.pdf",
-  photo: "/profile.jpg",
+  photo: "/profile.png",
   photoAlt: "Awais Ahmad, .NET software engineer",
 } as const;
 
