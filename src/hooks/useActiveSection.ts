@@ -4,7 +4,19 @@ import { useEffect, useState } from "react";
 
 /**
  * Tracks which section id is currently occupying the reading area of the
- * viewport. Uses a single IntersectionObserver rather than scroll listeners.
+ * viewport: the active section is the last one whose top has passed a moving
+ * reference line.
+ *
+ * The line rides scroll progress — at the top of the document it sits at the
+ * top of the viewport, at the foot it sits at the bottom, and through the
+ * middle it rides the centre. That single rule is what makes the first and last
+ * sections reachable at all. A fixed mid-viewport band cannot be crossed by a
+ * final section shorter than the space beneath it, so Contact could never take
+ * the highlight from Skills no matter how far down the page you scrolled.
+ *
+ * Because the line and the section tops are both monotonic in scroll position,
+ * the chosen index only ever moves one way per scroll direction — there is no
+ * arrangement that flickers between two sections.
  */
 export function useActiveSection(ids: readonly string[], fallback = ids[0]) {
   const [active, setActive] = useState<string>(fallback);
@@ -16,27 +28,45 @@ export function useActiveSection(ids: readonly string[], fallback = ids[0]) {
 
     if (elements.length === 0) return;
 
-    const visible = new Map<string, number>();
+    let frame = 0;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) visible.set(entry.target.id, entry.intersectionRatio);
-          else visible.delete(entry.target.id);
-        }
+    const measure = () => {
+      frame = 0;
 
-        if (visible.size === 0) return;
+      const viewport = window.innerHeight;
+      const maxScroll = document.documentElement.scrollHeight - viewport;
+      const progress =
+        maxScroll > 0 ? Math.min(Math.max(window.scrollY / maxScroll, 0), 1) : 0;
 
-        // Prefer the section highest in document order among the visible ones,
-        // which keeps the indicator stable while scrolling through long sections.
-        const first = ids.find((id) => visible.has(id));
-        if (first) setActive(first);
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.15, 0.5, 1] },
-    );
+      // Offset of the reference line from the top of the viewport.
+      const line = viewport * progress;
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+      // Tops ascend in document order, so the last match is the current one.
+      let current = elements[0].id;
+      for (const el of elements) {
+        if (el.getBoundingClientRect().top <= line) current = el.id;
+      }
+
+      // React bails out when the value is unchanged, so this is free on the
+      // frames where nothing crossed the line.
+      setActive(current);
+    };
+
+    // One measurement per frame at most; scroll fires far more often than that.
+    const schedule = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(measure);
+    };
+
+    measure();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
   }, [ids]);
 
   return active;
