@@ -9,7 +9,7 @@ export const profile = {
   name: "Awais Ahmad",
   firstName: "Awais",
   lastName: "Ahmad",
-  role: ".NET Engineer",
+  role: ".NET Software Engineer",
   /** One value-focused line. Nothing else belongs in the hero. */
   tagline: "I build .NET applications end to end — from the API layer to the interface.",
   location: "Pakistan",
